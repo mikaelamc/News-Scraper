@@ -56,9 +56,19 @@ app.get("/scrape", function(req, res) {
      });
  
      // If we were able to successfully scrape and save an Article, send a message to the client
-     res.send("Scrape Complete");
+    
+    //  res.sendFile("/complete")
+     res.redirect(200, 'scrapecomplete.html');
+   
    });
  });
+
+
+//  app.get('/complete',function(req,res){
+       
+//   res.sendFile(path.join(__dirname+'/scrapecomplete.html'));
+
+// });
 
  // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
@@ -71,6 +81,7 @@ app.get("/articles", function(req, res) {
     .catch(function(err) {
       // If an error occurred, send it to the client
       res.json(err);
+      
     });
 });
 
