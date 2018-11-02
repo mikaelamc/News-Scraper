@@ -10,7 +10,8 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
+
 
 // Initialize Express
 var app = express();
@@ -27,11 +28,11 @@ app.use(express.static("public"));
 // Scrape data from one site and place it into the mongodb db
 app.get("/scrape", function(req, res) {
 //   // Make a request via axios for the news section of `ycombinator`
-   axios.get("https://www.theonion.com/").then(function(response) {
+   axios.get("https://gizmodo.com/tag/science").then(function(response) {
 //     // Load the html body from axios into cheerio
      var $ = cheerio.load(response.data);
 //     // For each element with a "title" class
-     $(".js_curation-click").each(function(i, element) {
+     $("h1").each(function(i, element) {
 //       // Save the text and href of each link enclosed in the current element
        var result = {};
        // Add the text and href of every link, and save them as properties of the result object
